@@ -31,23 +31,15 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
         List<Customer> listCustomersEntity = customerDAO.listCustomers();
         for (Customer customer : listCustomersEntity)
         {
-        	CustomerTO customerTO = new CustomerTO();
-        	customerTO.setId(customer.getId());
-        	customerTO.setName(customer.getName());
-        	customerTO.setEmail(customer.getEmail());
-        	customerTO.setBirthDate(customer.getBirthDate());
-        	customerTO.setCpf(customer.getCpf());
-        	customerTO.setCep(customer.getCep());
-        	customerTO.setGender(customer.getGender());
 
-        	listCustomersTO.add(customerTO);
+        	listCustomersTO.add(createNewCustomerTO(customer));
         }
 
         return listCustomersTO;
 
     }
 
-    @Override
+	@Override
     public CustomerTO insertCustomer(CustomerTO customerTO)
     {
         Customer customer = new Customer(
@@ -65,12 +57,24 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
 
         return customerTO;
     }
-
-	@Override
+    
+    @Override
 	public CustomerTO getCustomerById(Integer id) {
-		return null;
-		//CustomerTO customerTO = customerDAO.getCustomerById(id);
-		//return customerTO;
+		Customer customer = customerDAO.getCustomerById(id);
+    	
+		return createNewCustomerTO(customer);
+	}
+
+    private CustomerTO createNewCustomerTO(Customer customer) {
+    	CustomerTO customerTO = new CustomerTO();
+    	customerTO.setId(customer.getId());
+    	customerTO.setName(customer.getName());
+    	customerTO.setEmail(customer.getEmail());
+    	customerTO.setBirthDate(customer.getBirthDate());
+    	customerTO.setCpf(customer.getCpf());
+    	customerTO.setCep(customer.getCep());
+    	customerTO.setGender(customer.getGender());
+    	return customerTO;
 	}
 
 }
