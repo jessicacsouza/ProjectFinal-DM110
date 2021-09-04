@@ -25,8 +25,8 @@ public class CustomerDAO {
 		return em.createQuery("from Customer c", Customer.class).getResultList();
 	}
 	
-	public void updateCustomer(Customer customer) {
-		em.merge(customer);
+	public Customer updateCustomer(Customer customer) {
+		return em.merge(customer);
 	}
 	
 

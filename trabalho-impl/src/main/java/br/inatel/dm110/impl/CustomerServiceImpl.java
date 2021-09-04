@@ -35,4 +35,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return localRegistryBean.insertCustomer(customerTO);
 	}
 
+	@Override
+	public CustomerTO updateCustomer(Integer id, CustomerTO customerTO) {
+		return localRegistryBean.updateCustomer(id, customerTO);
+	}
+
 }

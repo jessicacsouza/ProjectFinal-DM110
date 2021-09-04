@@ -11,5 +11,7 @@ public interface CustomerRegistration {
 	 CustomerTO insertCustomer(CustomerTO customerTO);
 	 
 	 CustomerTO getCustomerById(Integer id);
+	 
+	 CustomerTO updateCustomer(Integer id, CustomerTO customerTO);
 
 }
