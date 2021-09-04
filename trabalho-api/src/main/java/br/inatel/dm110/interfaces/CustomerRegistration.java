@@ -9,5 +9,7 @@ public interface CustomerRegistration {
 	 List<CustomerTO> listCustomers();
 
 	 CustomerTO insertCustomer(CustomerTO customerTO);
+	 
+	 CustomerTO getCustomerById(Integer id);
 
 }

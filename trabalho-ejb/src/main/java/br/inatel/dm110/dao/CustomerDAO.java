@@ -17,7 +17,7 @@ public class CustomerDAO {
 		em.persist(customer);
 	}
 	
-	public Customer getCustomerById(String id) {
+	public Customer getCustomerById(Integer id) {
 		return em.createQuery("from Customer c where id = '" + id + "'", Customer.class).getSingleResult();
 	}
 

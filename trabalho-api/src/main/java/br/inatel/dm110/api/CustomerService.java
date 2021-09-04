@@ -22,7 +22,7 @@ public interface CustomerService {
     @GET
 	@Path("/customer/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	Response getCustomer(@PathParam("id") Integer id);
+	Response getCustomerById(@PathParam("id") Integer id);
 
     @POST
     @Path ("/customer")

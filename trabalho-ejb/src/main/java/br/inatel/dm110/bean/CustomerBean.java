@@ -66,4 +66,11 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
         return customerTO;
     }
 
+	@Override
+	public CustomerTO getCustomerById(Integer id) {
+		return null;
+		//CustomerTO customerTO = customerDAO.getCustomerById(id);
+		//return customerTO;
+	}
+
 }
