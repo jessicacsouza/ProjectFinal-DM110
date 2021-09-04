@@ -16,8 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<CustomerTO> listCustomers() {
-		// TODO Auto-generated method stub
-		return null;
+		return localRegistryBean.listCustomers();
 	}
 
 	@Override
@@ -32,9 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerTO insertCustomer(CustomerTO cliente) {
-		// TODO Auto-generated method stub
-		return null;
+	public CustomerTO insertCustomer(CustomerTO customerTO) {
+		return localRegistryBean.insertCustomer(customerTO);
 	}
 
 }
