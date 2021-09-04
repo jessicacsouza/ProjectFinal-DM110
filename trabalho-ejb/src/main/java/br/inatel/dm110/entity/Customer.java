@@ -1,4 +1,4 @@
-package br.inatel.dm110.ejb.entity;
+package br.inatel.dm110.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +19,27 @@ public class Customer {
     private String gender;
     private String email;
     private String cep;
+    private String cpf;
     
+	public Customer(String name, String birthDate, String gender, String email, String cep, String cpf) {
+		this.name = name;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.email = email;
+		this.cep = cep;
+		this.cpf = cpf;
+	}
+	
+	public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
 	public String getName() {
 		return name;
 	}
@@ -58,6 +78,14 @@ public class Customer {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }
