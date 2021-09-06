@@ -23,6 +23,7 @@
     <module>trabalho-web</module>
     <module>trabalho-api</module>
     <module>trabalho-impl</module>
+    <module>trabalho-mdb</module>
   </modules>
 
   <build>
