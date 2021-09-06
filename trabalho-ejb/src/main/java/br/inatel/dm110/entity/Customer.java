@@ -21,6 +21,10 @@ public class Customer {
     private String cep;
     private String cpf;
     
+    public Customer() {
+    	
+    }
+    
 	public Customer(String name, String birthDate, String gender, String email, String cep, String cpf) {
 		this.name = name;
 		this.birthDate = birthDate;

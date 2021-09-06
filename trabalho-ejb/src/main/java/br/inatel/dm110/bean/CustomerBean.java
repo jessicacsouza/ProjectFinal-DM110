@@ -13,6 +13,7 @@ import br.inatel.dm110.dao.CustomerDAO;
 import br.inatel.dm110.entity.Customer;
 import br.inatel.dm110.interfaces.LocalRegistry;
 import br.inatel.dm110.interfaces.RemoteRegistration;
+import br.inatel.dm110.sender.CustomerQueueSender;
 
 @Stateless
 @Remote (RemoteRegistration.class)
@@ -22,6 +23,9 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
 
     @EJB
     private CustomerDAO customerDAO;
+    
+    @EJB
+    private CustomerQueueSender queueSender;
 
     @Override
     public List<CustomerTO> listCustomers() {
@@ -54,6 +58,7 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
         customerDAO.insertCustomer(customer);
         
         customerTO.setId(customer.getId());
+        queueSender.sendCustomerCreatedMessage(customer);
 
         return customerTO;
     }
@@ -67,16 +72,14 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
     
 	@Override
 	public CustomerTO updateCustomer(Integer id, CustomerTO customerTO) {
-		Customer customer = customerDAO.getCustomerById(id);
-    	customer.setId(customerTO.getId());
-    	customer.setName(customerTO.getName());
-    	customer.setEmail(customerTO.getEmail());
-    	customer.setBirthDate(customerTO.getBirthDate());
-    	customer.setCpf(customerTO.getCpf());
-    	customer.setCep(customerTO.getCep());
-    	customer.setGender(customerTO.getGender());
+		customerTO.setId(id);
 		
-		return createNewCustomerTO(customerDAO.updateCustomer(customer));
+		Customer customer = createNewCustomer(customerTO, customerDAO.getCustomerById(id));
+    	Customer updatedCustomer = customerDAO.updateCustomer(customer);
+    	
+    	queueSender.sendCustomerUpdatedMessage(updatedCustomer);
+		
+		return createNewCustomerTO(updatedCustomer);
 		
 	}
 
@@ -93,8 +96,20 @@ public class CustomerBean implements RemoteRegistration, LocalRegistry
 	    	return customerTO;
 	    }
     	
-    	return null;
-    	
+    	return null;    	
 	}
+    
+    private Customer createNewCustomer(CustomerTO customerTO, Customer customer) {
+    	if(customerTO != null) {
+    		customer.setId(customerTO.getId());
+        	customer.setName(customerTO.getName());
+        	customer.setEmail(customerTO.getEmail());
+        	customer.setBirthDate(customerTO.getBirthDate());
+        	customer.setCpf(customerTO.getCpf());
+        	customer.setCep(customerTO.getCep());
+        	customer.setGender(customerTO.getGender());
+    	}
+    	return null;
+    }
 
 }
