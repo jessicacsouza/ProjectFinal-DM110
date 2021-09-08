@@ -12,27 +12,27 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path ("/customer")
+@Path ("/customers")
 public interface CustomerService {
 	
     @GET
-    @Path ("/customers")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     List<CustomerTO> listCustomers();
     
     @GET
-	@Path("/customer/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	Response getCustomerById(@PathParam("id") Integer id);
 
     @POST
-    @Path ("/customer")
+    @Path ("")
     @Consumes (MediaType.APPLICATION_JSON)
     @Produces (MediaType.APPLICATION_JSON)
     CustomerTO insertCustomer(CustomerTO customerTO);
     
     @PUT
-    @Path ("/customer/{id}")
+    @Path ("/{id}")
     @Consumes (MediaType.APPLICATION_JSON)
     @Produces (MediaType.APPLICATION_JSON)
     CustomerTO updateCustomer(@PathParam("id") Integer id , CustomerTO customerTO);

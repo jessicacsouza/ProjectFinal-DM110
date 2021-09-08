@@ -1,8 +1,11 @@
 package br.inatel.dm110.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import br.inatel.dm110.entity.Customer;
@@ -10,7 +13,7 @@ import br.inatel.dm110.entity.Customer;
 @Stateless
 public class CustomerDAO {
 	
-	@PersistenceContext(unitName = "customer")
+	@PersistenceContext(unitName = "trabalho_dm110_pu")
 	private EntityManager em;
 
 	public void insertCustomer(Customer customer) {
@@ -26,7 +29,7 @@ public class CustomerDAO {
 	}
 	
 	public Customer updateCustomer(Customer customer) {
-		return em.merge(customer);
+		return em.merge(customer);		
 	}
 	
 

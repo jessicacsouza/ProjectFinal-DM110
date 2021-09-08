@@ -3,12 +3,14 @@ package br.inatel.dm110.impl;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.Response;
 
 import br.inatel.dm110.api.CustomerService;
 import br.inatel.dm110.api.CustomerTO;
 import br.inatel.dm110.interfaces.LocalRegistry;
 
+@RequestScoped
 public class CustomerServiceImpl implements CustomerService {
 	
 	@EJB
